@@ -54,7 +54,7 @@ public class TarefaModel {
         if (o == this) return true;
         if (!(o instanceof TarefaModel)) return false;
         final TarefaModel other = (TarefaModel) o;
-        if (!other.canEqual(this)) return false;
+        if (!other.canEqual((Object) this)) return false;
         final Object this$idTarefa = this.getIdTarefa();
         final Object other$idTarefa = other.getIdTarefa();
         if (this$idTarefa == null ? other$idTarefa != null : !this$idTarefa.equals(other$idTarefa)) return false;
@@ -77,7 +77,9 @@ public class TarefaModel {
             return false;
         final Object this$responsavel = this.getResponsavel();
         final Object other$responsavel = other.getResponsavel();
-        return this$responsavel == null ? other$responsavel == null : this$responsavel.equals(other$responsavel);
+        if (this$responsavel == null ? other$responsavel != null : !this$responsavel.equals(other$responsavel))
+            return false;
+        return true;
     }
 
     protected boolean canEqual(final Object other) {

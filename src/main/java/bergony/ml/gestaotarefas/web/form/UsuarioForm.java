@@ -26,13 +26,14 @@ public class UsuarioForm implements ViewFormBean  {
         if (o == this) return true;
         if (!(o instanceof UsuarioForm)) return false;
         final UsuarioForm other = (UsuarioForm) o;
-        if (!other.canEqual(this)) return false;
+        if (!other.canEqual((Object) this)) return false;
         final Object this$idUsuario = this.getIdUsuario();
         final Object other$idUsuario = other.getIdUsuario();
         if (this$idUsuario == null ? other$idUsuario != null : !this$idUsuario.equals(other$idUsuario)) return false;
         final Object this$name = this.getName();
         final Object other$name = other.getName();
-        return this$name == null ? other$name == null : this$name.equals(other$name);
+        if (this$name == null ? other$name != null : !this$name.equals(other$name)) return false;
+        return true;
     }
 
     protected boolean canEqual(final Object other) {

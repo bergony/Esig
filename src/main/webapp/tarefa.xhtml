@@ -53,7 +53,7 @@
                             <label for="monthField" class="form-label">Responsavel:</label>
                             <h:selectOneMenu value="#{tarefaForm.responsavel}" class="form-select" converter="#{usuarioConversor}">
                                 <f:selectItem itemValue="#{null}" itemLabel="-- select one --"/>
-                                <f:selectItems value="#{listaUsuariosForm.usuarios}" var="usuario"
+                                <f:selectItems value="#{listarForm.usuarios}" var="usuario"
                                                itemValue="#{usuario}" itemLabel="#{usuario.name}"/>
                             </h:selectOneMenu>
                         </div>

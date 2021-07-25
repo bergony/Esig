@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 
 <h:head>
@@ -40,6 +41,14 @@
                     <h:form>
                         <h:commandButton value="Cadastrar Usuario" class="btn btn-primary btn-lg btn-block"
                                          action="usuario"/>
+                    </h:form>
+                    <br/>
+                    <h:form>
+                        <h:commandButton value="Litar Tarefas" class="btn btn-primary btn-lg btn-block"
+                                         action="listarTarefa">
+                            <f:actionListener binding="#{listarForm.tarefas}" />
+                        </h:commandButton>
+
                     </h:form>
                 </div>
             </div>

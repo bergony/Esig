@@ -1,11 +1,11 @@
 package bergony.ml.gestaotarefas.services;
 
+import bergony.ml.gestaotarefas.enums.TarefaStatus;
 import bergony.ml.gestaotarefas.model.TarefaModel;
 import bergony.ml.gestaotarefas.repositories.TarefaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TarefaServiceImpl implements TarefaService {
@@ -18,6 +18,7 @@ public class TarefaServiceImpl implements TarefaService {
 
     @Override
     public TarefaModel criarTarefa(TarefaModel tarefaModel) {
+        tarefaModel.setTarefaStatus(TarefaStatus.EM_ANDAMENTO);
         return tarefaRepository.save(tarefaModel);
     }
 
@@ -46,7 +47,7 @@ public class TarefaServiceImpl implements TarefaService {
     @Override
     public TarefaModel findByTarefa(TarefaModel tarefaModel) {
         return tarefaRepository.getOne(tarefaModel.getIdTarefa());
-             }
+    }
 
     @Override
     public void removerTarefa(Long id) {
