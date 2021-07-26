@@ -28,7 +28,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         try {
             usuarioRepository.findById(usuarioModel.getIdUsuario());
         } catch (Exception e) {
-            System.out.println("Usuario nao encontrada :" + e.getMessage());
+            System.out.println("Usuario nao encontrada :");
         }
 
         UsuarioModel usuarioParaAtualzar = UsuarioModel.builder().
