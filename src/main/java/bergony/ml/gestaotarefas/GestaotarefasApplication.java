@@ -10,9 +10,7 @@ import org.springframework.context.annotation.Description;
 
 import javax.faces.webapp.FacesServlet;
 import javax.servlet.DispatcherType;
-
 import java.util.EnumSet;
-import java.util.List;
 
 @SpringBootApplication
 public class GestaotarefasApplication {

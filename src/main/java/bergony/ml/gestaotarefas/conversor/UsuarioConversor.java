@@ -20,6 +20,8 @@ public class UsuarioConversor implements Converter {
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
+        if("-- Selecione Responsavel --".equals(value)) return null;
+        if("-- Selecione Situação --".equals(value)) return null;
         return usuarioRepository.findById(Long.valueOf(value)).orElse(null);
     }
 

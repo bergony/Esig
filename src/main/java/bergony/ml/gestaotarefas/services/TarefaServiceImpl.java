@@ -2,10 +2,13 @@ package bergony.ml.gestaotarefas.services;
 
 import bergony.ml.gestaotarefas.enums.TarefaStatus;
 import bergony.ml.gestaotarefas.model.TarefaModel;
+import bergony.ml.gestaotarefas.model.UsuarioModel;
 import bergony.ml.gestaotarefas.repositories.TarefaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TarefaServiceImpl implements TarefaService {
@@ -58,5 +61,27 @@ public class TarefaServiceImpl implements TarefaService {
     @Override
     public List<TarefaModel> listarTarefas() {
         return tarefaRepository.findAll();
+    }
+
+    @Override
+    public List<TarefaModel> filtroTarefas(TarefaModel tarefaModel) {
+
+        List<TarefaModel> tarefaModels = new ArrayList<>();
+
+        if (tarefaModel.getIdTarefa() != null) {
+            tarefaModels.add(tarefaRepository.findById(tarefaModel.getIdTarefa()).orElse(null));
+        }
+        if (!tarefaModel.getDescricao().isBlank()) {
+            tarefaModels.addAll(tarefaRepository.findAllByTituloContains(tarefaModel.getDescricao()));
+            tarefaModels.addAll(tarefaRepository.findAllByDescricaoContains(tarefaModel.getDescricao()));
+        }
+        if( tarefaModel.getResponsavel() != null) {
+            tarefaModels.addAll( tarefaRepository.findByResponsavel(tarefaModel.getResponsavel()));
+        }
+        if( tarefaModel.getTarefaStatus() != null) {
+            tarefaModels.addAll( tarefaRepository.findAllByTarefaStatus(tarefaModel.getTarefaStatus()));
+        }
+        return tarefaModels.stream().distinct().collect(Collectors.toList());
+
     }
 }

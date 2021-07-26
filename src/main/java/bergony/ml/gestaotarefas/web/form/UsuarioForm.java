@@ -1,10 +1,15 @@
 package bergony.ml.gestaotarefas.web.form;
 
 import bergony.ml.gestaotarefas.model.UsuarioModel;
+import bergony.ml.gestaotarefas.services.UsuarioService;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
+
+import javax.annotation.PostConstruct;
+import java.util.List;
 
 @NoArgsConstructor
 @Data
@@ -12,13 +17,30 @@ import org.springframework.web.context.annotation.SessionScope;
 @SessionScope
 public class UsuarioForm implements ViewFormBean  {
 
+
+
     private Long idUsuario;
 
     private String name;
 
+    private List<UsuarioModel> usuarios;
+
+    private UsuarioService usuarioService;
+
+
     public UsuarioForm(UsuarioModel usuarioModel) {
         this.idUsuario = usuarioModel.getIdUsuario();
         this.name = usuarioModel.getName();
+    }
+
+    @Autowired
+    public UsuarioForm(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+    }
+
+    @PostConstruct
+    public void init() {
+        usuarios = usuarioService.listarUsuario();
     }
 
     @Override

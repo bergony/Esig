@@ -17,6 +17,8 @@ public interface TarefaService {
 
     List<TarefaModel> listarTarefas();
 
+    List<TarefaModel> filtroTarefas(TarefaModel tarefaModel);
+
 
 
 

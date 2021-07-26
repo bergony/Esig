@@ -4,12 +4,16 @@ import bergony.ml.gestaotarefas.enums.PrioridadeStatus;
 import bergony.ml.gestaotarefas.enums.TarefaStatus;
 import bergony.ml.gestaotarefas.model.TarefaModel;
 import bergony.ml.gestaotarefas.model.UsuarioModel;
+import bergony.ml.gestaotarefas.services.TarefaService;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
+import javax.annotation.PostConstruct;
 import java.util.Date;
+import java.util.List;
 
 @NoArgsConstructor
 @Data
@@ -31,6 +35,13 @@ public class TarefaForm implements ViewFormBean {
 
     private UsuarioModel responsavel;
 
+    private List<TarefaModel> tarefas;
+
+    private TarefaModel tarefa = new TarefaModel();
+
+    private TarefaService tarefaService;
+
+
     public TarefaForm(TarefaModel tarefaModel) {
         this.idTarefa = tarefaModel.getIdTarefa();
         this.titulo = tarefaModel.getTitulo();
@@ -39,6 +50,16 @@ public class TarefaForm implements ViewFormBean {
         this.deadline = tarefaModel.getDeadline();
         this.tarefaStatus = tarefaModel.getTarefaStatus();
         this.responsavel = tarefaModel.getResponsavel();
+    }
+
+    @Autowired
+    public TarefaForm(TarefaService tarefaService) {
+        this.tarefaService = tarefaService;
+    }
+
+    @PostConstruct
+    public void init() {
+        tarefas = tarefaService.listarTarefas();
     }
 
     @Override

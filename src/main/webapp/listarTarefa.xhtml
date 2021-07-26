@@ -38,70 +38,76 @@
                     <div class="mb-3">
                         <label for="monthField" class="form-label">Número:</label>
                         <h:inputText id="monthField" styleClass="form-control" autocomplete="off" maxlength="10"
-                                     value="#{tarefaForm.idTarefa}"/>
+                                     value="#{tarefaForm.tarefa.idTarefa}"/>
                     </div>
 
                     <div class="mb-3">
-                        <label for="descricaoField" class="form-label">Titulo/Descrição:</label>
+                        <label for="descricaoField" class="form-label">Título/Descrição:</label>
                         <h:inputTextarea id="descricaoField" styleClass="form-control" cols="30" rows="10"
-                                         value="#{tarefaForm.descricao}"/>
+                                         value="#{tarefaForm.tarefa.descricao}"/>
                     </div>
 
                     <div class="row">
                         <div class="col-sm">
-                            <label for="monthField" class="form-label">Responsavel:</label>
-                            <h:selectOneMenu value="#{tarefaForm.responsavel}" class="form-select"
+                            <label for="monthField" class="form-label">Responsável:</label>
+                            <h:selectOneMenu value="#{tarefaForm.tarefa.responsavel}" class="form-select"
                                              converter="#{usuarioConversor}">
-                                <f:selectItem itemValue="#{null}" itemLabel="-- select one --"/>
-                                <f:selectItems value="#{listarForm.usuarios}" var="usuario"
+                                <f:selectItem itemValue="#{tarefaForm.tarefa.responsavel}" itemLabel="-- Selecione Responsavel --"/>
+                                <f:selectItems value="#{usuarioForm.usuarios}"  var="usuario"
                                                itemValue="#{usuario}" itemLabel="#{usuario.name}"/>
                             </h:selectOneMenu>
                         </div>
                         <div class="col-sm">
                             <label for="monthField" class="form-label">Situação:</label>
-                            <h:selectOneMenu value="#{tarefaForm.tarefaStatus}" class="form-select">
-                                <f:selectItem itemValue="#{null}" itemLabel="-- select one --"/>
+                            <h:selectOneMenu value="#{tarefaForm.tarefa.tarefaStatus}" class="form-select">
+                                <f:selectItem itemValue="#{tarefaForm.tarefa.tarefaStatus}" itemLabel="-- Selecione Situação --"/>
                                 <f:selectItems value="#{tarefaAction.tarefaStatusItems}"/>
                             </h:selectOneMenu>
                         </div>
                         <div class="col-sm">
-                            <h:commandButton type="submit" value="Cadastrar Tarefa" styleClass="btn btn-primary"
-                                             action="#{tarefaAction.criarTarefa}"/>
+                            <h:commandButton type="submit" value="Pesquisar Tarefa" styleClass="btn btn-primary"
+                                             action="#{tarefaAction.filtraTarefa}"/>
                         </div>
                     </div>
                 </h:form>
 
-                <br/>
-                <h:dataTable value="#{listarForm.tarefas}" var="tarefa">
-                    <h:column>
+                <h:form>
+                <h:dataTable class="table" value="#{tarefaForm.tarefas}" var="tarefa">
+                    <h:column scope="col">
                         <f:facet name="header">Id</f:facet>
-                        <h:outputText value="#{tarefa.responsavel.idUsuario}"/>
+                        <h:outputText value="#{tarefa.idTarefa}"/>
                     </h:column>
-                    <h:column>
-                        <f:facet name="header">Titulo</f:facet>
+                    <h:column scope="col">
+                        <f:facet name="header">Título</f:facet>
                         <h:outputText value="#{tarefa.titulo}"/>
                     </h:column>
-                    <h:column>
-                        <f:facet name="header">Responsavel</f:facet>
+                    <h:column scope="col">
+                        <f:facet name="header">Responsável</f:facet>
                         <h:outputText value="#{tarefa.responsavel.name}"/>
                     </h:column>
-                    <h:column>
+                    <h:column scope="col">
                         <f:facet name="header">Ações</f:facet>
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <h:commandButton type="submit" value="Cadastrar Tarefa" styleClass="btn-link"
-                                             action="#{tarefaAction.criarTarefa}"/>
-                            <h:commandButton type="submit" value="Cadastrar Tarefa" styleClass="btn-link"
-                                             action="#{tarefaAction.criarTarefa}"/>
-                            <h:commandButton type="submit" value="Cadastrar Tarefa" styleClass="btn-link"
-                                             action="#{tarefaAction.criarTarefa}"/>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <h:commandButton type="submit" value="Editar" styleClass="btn-link"
+                                                     action="editar">
+                                        <f:actionListener binding="#{tarefaAction.editarTarefa(tarefa)}" />
+                                    </h:commandButton>
+                                </div>
+                                <div class="col-sm">
+                                    <h:commandButton type="submit" value="Excluir" styleClass="btn-link"
+                                                     action="#{tarefaAction.deletarTarefa(tarefa)}"/>
+                                </div>
+                                <div class="col-sm">
+                                    <h:commandButton type="submit" value="Concluir" styleClass="btn-link"
+                                                     action="#{tarefaAction.concluirTarefa(tarefa)}"/>
+                                </div>
+                            </div>
                         </div>
                     </h:column>
                 </h:dataTable>
-
-
-                <br/>
-
-
+                </h:form>
             </div>
         </div>
     </main>

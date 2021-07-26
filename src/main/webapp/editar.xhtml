@@ -29,7 +29,7 @@
 
             <div class="col p-4 text-center">
                 <br/>
-                <h4>Cadastrar Tarefa</h4>
+                <h4>Editar Tarefa</h4>
                 <hr/>
             </div>
             <div class="col p-1">
@@ -39,52 +39,55 @@
                     <div class="mb-3">
                         <label for="monthField" class="form-label">Titulo:</label>
                         <h:inputText id="monthField" styleClass="form-control" autocomplete="off" maxlength="10"
-                                     value="#{tarefaForm.titulo}"/>
+                                     value="#{tarefaForm.tarefa.titulo}"/>
                     </div>
 
                     <div class="mb-3">
                         <label for="descricaoField" class="form-label">Descrição:</label>
                         <h:inputTextarea id="descricaoField" styleClass="form-control" cols="30" rows="10"
-                                         value="#{tarefaForm.descricao}"/>
+                                         value="#{tarefaForm.tarefa.descricao}"/>
                     </div>
 
                     <div class="row">
                         <div class="col-sm">
                             <label for="monthField" class="form-label">Responsavel:</label>
-                            <h:selectOneMenu value="#{tarefaForm.responsavel}" class="form-select"
+                            <h:selectOneMenu value="#{tarefaForm.tarefa.responsavel}" class="form-select"
                                              converter="#{usuarioConversor}">
-                                <f:selectItem itemValue="#{null}" itemLabel="-- Selecione Responsavel --"/>
+                                <f:selectItem itemValue="#{tarefaForm.tarefa.responsavel}" itemLabel="-- Selecione Responsavel --"/>
                                 <f:selectItems value="#{usuarioForm.usuarios}" var="usuario"
                                                itemValue="#{usuario}" itemLabel="#{usuario.name}"/>
                             </h:selectOneMenu>
                         </div>
                         <div class="col-sm">
                             <label for="monthField" class="form-label">Prioridade:</label>
-                            <h:selectOneMenu value="#{tarefaForm.prioridadeStatus}" class="form-select">
-                                <f:selectItem itemValue="#{null}" itemLabel="-- Selecione Prioridade --"/>
+                            <h:selectOneMenu value="#{tarefaForm.tarefa.prioridadeStatus}" class="form-select">
+                                <f:selectItem itemValue="#{tarefaForm.tarefa.prioridadeStatus}" itemLabel="-- Selecione Prioridade --"/>
                                 <f:selectItems value="#{tarefaAction.prioridadesStatusItems}"/>
                             </h:selectOneMenu>
                         </div>
+                        <div class="col-sm">
+                            <label for="monthField" class="form-label">Situação:</label>
+                            <h:selectOneMenu value="#{tarefaForm.tarefa.tarefaStatus}" class="form-select">
+                                <f:selectItem itemValue="#{tarefaForm.tarefa.tarefaStatus}" itemLabel="-- Selecione Situação --"/>
+                                <f:selectItems value="#{tarefaAction.tarefaStatusItems}"/>
+                            </h:selectOneMenu>
+                        </div>
                     </div>
-
 
                     <br/>
 
                     <div class="row">
                         <div class="col-sm">
                             <label for="DeadLine" class="form-label">DeadLine:</label>
-                            <h:inputText id="DeadLine" value="#{tarefaForm.deadline}"
+                            <h:inputText id="DeadLine" value="#{tarefaForm.tarefa.deadline}"
                                          label="Date" styleClass="form-control">
                                 <f:convertDateTime pattern="dd-mm-yyyy"/>
                             </h:inputText>
                         </div>
                     </div>
-
-
                     <br/>
-
-                    <h:commandButton type="submit" value="Cadastrar Tarefa"  styleClass="btn btn-primary"
-                                     action="#{tarefaAction.criarTarefa}">
+                    <h:commandButton type="submit" value="Editar Tarefa"  styleClass="btn btn-primary"
+                                     action="#{tarefaAction.patchTarefa}">
                     </h:commandButton>
                 </h:form>
 

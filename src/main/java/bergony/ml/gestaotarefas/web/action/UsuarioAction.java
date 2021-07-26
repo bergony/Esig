@@ -1,5 +1,6 @@
 package bergony.ml.gestaotarefas.web.action;
 
+import bergony.ml.gestaotarefas.model.TarefaModel;
 import bergony.ml.gestaotarefas.model.UsuarioModel;
 import bergony.ml.gestaotarefas.services.UsuarioService;
 import bergony.ml.gestaotarefas.web.form.UsuarioForm;
@@ -20,11 +21,12 @@ public class UsuarioAction implements RequestActionBean {
 
     private final UsuarioForm usuarioForm;
 
-    @Autowired
     private final UsuarioService usuarioService;
 
     public void criarUsuario() {
-        usuarioService.criarUsuario(new UsuarioModel(usuarioForm));
+        UsuarioModel usuario = new UsuarioModel(usuarioForm);
+        usuarioForm.getUsuarios().add(usuario);
+        usuarioService.criarUsuario(usuario);
     }
 
 
