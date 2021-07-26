@@ -82,6 +82,5 @@ public class TarefaServiceImpl implements TarefaService {
             tarefaModels.addAll( tarefaRepository.findAllByTarefaStatus(tarefaModel.getTarefaStatus()));
         }
         return tarefaModels.stream().distinct().collect(Collectors.toList());
-
     }
 }

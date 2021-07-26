@@ -15,6 +15,7 @@ com as seguintes funcionalidades:
 
 - Maven
 - Java JDK 11
+- PostgreSQL
 
 
 ## Tecnologias utilizadas
@@ -28,13 +29,8 @@ com as seguintes funcionalidades:
 
 
 ### Para executar:
+Verificar se Postgress esta rodanddo.
 ```
-{localPort}:8080 
-SQLSERVER_IP={ip:port}
-DATABASE_NAME={nome} 
-SQLSERVER_USERNAME={username} 
-SQLSERVER_PASSWORD={password}
-IMPORTER_IP{ip:port}
-AUTHENTICATION_IP{ip:port}
-JWT_SECRET{secret}
+postgres --version
 ```
+
